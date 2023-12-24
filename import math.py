@@ -39,7 +39,6 @@ def cos(a):
 def tan(a):
     return math.tan(a)
 
-# Пример использования функций
 
 try:
     a = float(input("Введите первое число: "))
