@@ -1,3 +1,35 @@
+import json
+import csv
+
+class Game:
+    def __init__(self):
+        self.data = {}
+
+    def save_game(self, username, score):
+        self.data[username] = score
+        with open('data.json', 'w') as file:
+            json.dump(self.data, file)
+
+    def delete_save(self, username):
+        if username in self.data:
+            del self.data[username]
+            with open('data.json', 'w') as file:
+                json.dump(self.data, file)
+
+    def export_to_csv(self):
+        with open('data.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Username", "Score"])
+            for username, score in self.data.items():
+                writer.writerow([username, score])
+
+
+game = Game()
+game.save_game('user1', 100)
+game.save_game('user2', 150)
+game.export_to_csv()
+game.delete_save('user1')
+game.export_to_csv()
 class User:
     def __init__(self, username, password, role):
         self.username = username
